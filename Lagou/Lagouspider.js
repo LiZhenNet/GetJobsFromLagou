@@ -37,7 +37,7 @@ function getJobs(pageNo) {
         if (jobjson.success) {
             InsertDB(jobjson.content.result);
             if (jobjson.content.hasNextPage) {
-                getJobs(currentPageNo + 1);
+                getJobs(jobjson.content.currentPageNo + 1);
             } else {
                 console.log('抓取完毕，共抓取' + jobjson.content.currentPageNo + '页数据');
             }
