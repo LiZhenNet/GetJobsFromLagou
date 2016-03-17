@@ -1,5 +1,4 @@
-var mongoose = require('mongoose');
-var config = require('../config');
+var mongoose = require('mongoose'), config = require('../config'),common =require('../common');
 var uri = 'mongodb://' + config.host + ':' + config.port + '/' + config.db;
 var db = mongoose.createConnection(uri);
 db.on('error',console.error.bind(console,'连接错误:'));
@@ -27,7 +26,7 @@ function Job(job) {
     this.companyLabelList = job.companyLabelList,
     this.industryField=job.industryField,
     this.education = job.education,
-    this.workYear = job.workYear,
+    this.workYear =common.fromateWorkYear(job.workYear),
     this.createTime = new Date(job.createTime)
 };
 Job.prototype.save = function(callback) {
@@ -39,4 +38,8 @@ Job.prototype.save = function(callback) {
         callback(null, job);
     });
 };
+Job.getTotalListGroupByWorkYear=function (callback) {
+    jobModel.aggregate([{$group : {_id : "$workYear",total:{$sum:1}}},{ $sort : {total:-1}}],callback)
+};
+
 module.exports = Job;
