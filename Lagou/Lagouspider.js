@@ -5,12 +5,14 @@ function InsertDB(Data) {
     for (var i = 0; i < Data.length; i++) {
         var job =Data[i];
         var newjob = new Job({
+            positionId:job.positionId,
             positionName: job.positionName,
             positionAdvantage: job.positionAdvantage,
             salary: job.salary,
             companyName: job.companyName,
             companySize: job.companySize,
             companyLabelList: job.companyLabelList,
+            industryField:job.industryField,
             education: job.education,
             workYear: job.workYear,
             createTime: job.createTime
