@@ -16,7 +16,7 @@ function InsertDB(Data) {
             createTime: job.createTime
         })
         newjob.save(function(err,data) {
-            console.log(err);
+           // console.log(err);
         });
     }
 }
@@ -36,14 +36,18 @@ function getJobs(pageNo) {
         var jobjson = JSON.parse(sres.text);
         if (jobjson.success) {
             InsertDB(jobjson.content.result);
-            if (jobjson.content.hasNextPage) {
+            if (pageNo<jobjson.content.totalPageCount) {
                 getJobs(pageNo + 1);
             } else {
                 console.log('抓取完毕，共抓取' + pageNo + '页数据');
+                console.log('结束时间:'+new Date().toLocaleTimeString());
             }
         } else {
             console.log(jobjson.msg);
         }
     });
 };
-getJobs(1);
+(function () {
+    console.log('开始时间:'+new Date().toLocaleTimeString());
+    getJobs(1);
+})()
