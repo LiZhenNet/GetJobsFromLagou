@@ -7,6 +7,8 @@ var JobSchema = new mongoose.Schema({
     positionName: String,
     positionAdvantage: String,
     salary: String,
+    minsalary:Number,
+    maxsalary:Number,
     companyName: String,
     companySize: String,
     companyLabelList: [String],
@@ -21,6 +23,8 @@ function Job(job) {
     this.positionName = job.positionName,
     this.positionAdvantage = job.positionAdvantage,
     this.salary = job.salary,
+    this.minsalary=common.getMinSalary(job.salary),
+    this.maxsalary=common.getMaxSalary(job.salary),
     this.companyName = job.companyName,
     this.companySize = job.companySize,
     this.companyLabelList = job.companyLabelList,
@@ -39,7 +43,7 @@ Job.prototype.save = function(callback) {
     });
 };
 Job.removeAll=function(callback){
-    jobModel.remove();
+    jobModel.remove({},callback);
 };
 Job.getTotalListGroupByWorkYear=function (callback) {
     jobModel.aggregate([{$group : {_id : "$workYear",total:{$sum:1}}},{ $sort : {total:-1}}]).exec(callback);
