@@ -50,6 +50,7 @@ function getJobs(pageNo) {
     });
 };
 (function () {
+    Job.removeAll();
     console.log('开始时间:'+new Date().toLocaleTimeString());
     getJobs(1);
 })()

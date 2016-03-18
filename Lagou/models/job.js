@@ -38,8 +38,10 @@ Job.prototype.save = function(callback) {
         callback(null, job);
     });
 };
-Job.getTotalListGroupByWorkYear=function (callback) {
-    jobModel.aggregate([{$group : {_id : "$workYear",total:{$sum:1}}},{ $sort : {total:-1}}],callback)
+Job.removeAll=function(callback){
+    jobModel.remove();
 };
-
+Job.getTotalListGroupByWorkYear=function (callback) {
+    jobModel.aggregate([{$group : {_id : "$workYear",total:{$sum:1}}},{ $sort : {total:-1}}]).exec(callback);
+};
 module.exports = Job;

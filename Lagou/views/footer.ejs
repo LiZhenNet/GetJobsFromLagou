@@ -1,0 +1,25 @@
+<footer class="footer">
+  <p>© 2014 <a href="http://www.yunshipei.com" target="_blank">AllMobilize, Inc.</a> Licensed under <a
+      href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>. by the AmazeUI Team.</p>
+</footer>
+    <script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.5.2/js/amazeui.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.5.2/js/amazeui.ie8polyfill.min.js"></script>
+    <script>
+      $(function(){ 
+        $('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var $target = $(this.hash);
+            $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+            if ($target.length) {
+                var targetOffset = $target.offset().top;
+                $('html,body').animate({
+                    scrollTop: targetOffset
+                 }, 1000);
+                 return false;
+                }
+            }
+        });
+     })
+</script>
+</html>
