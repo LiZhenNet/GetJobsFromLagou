@@ -1,6 +1,4 @@
-var superagent = require('superagent');
-var urlencode = require('urlencode');
-var Job = require('./models/job');
+var superagent = require('superagent'),urlencode = require('urlencode'),Job = require('./models/job'),config = require('./config')
 function InsertDB(Data) {
     for (var i = 0; i < Data.length; i++) {
         var job =Data[i];
@@ -22,9 +20,9 @@ function InsertDB(Data) {
         });
     }
 }
-function getJobs(pageNo) {
+function getJobs(pageNo,city,kd) {
     var args = process.argv.slice(2);
-    var city = args[0] || '北京', kd = args[1] || '.Net', url = '';
+    var url = '';
     if (pageNo === 1) {
         url = 'http://www.lagou.com/jobs/positionAjax.json?city=' + urlencode(city) + '&first=true&kd=' + urlencode(kd) + '&pn=' + pageNo;
     } else {
@@ -39,7 +37,7 @@ function getJobs(pageNo) {
         if (jobjson.success) {
             InsertDB(jobjson.content.result);
             if (pageNo<jobjson.content.totalPageCount) {
-                getJobs(pageNo + 1);
+                getJobs(pageNo + 1,city,kd);
             } else {
                 console.log('抓取完毕，共抓取' + pageNo + '页数据');
                 console.log('结束时间:'+new Date().toLocaleTimeString());
@@ -51,6 +49,6 @@ function getJobs(pageNo) {
 };
 (function () {
     Job.removeAll();
-    console.log('开始时间:'+new Date().toLocaleTimeString());
-    getJobs(1);
+    console.log(new Date().toLocaleTimeString() +'开始抓取'+config.city+'的'+config.kd+'职位' );
+    getJobs(1,config.city,config.kd);
 })()
