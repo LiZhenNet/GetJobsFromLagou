@@ -6,11 +6,44 @@ router.get('/getTotalListGroupByWorkYear', function(req, res, next) {
         if (err) {
             res.render('error', { error: err });
         }
-        var result=[];
+        var result = [];
         data.forEach(function(element) {
-            result.push({value:element.total, name:element._id});
+            result.push({ value: element.total, name: element._id });
         }, this);
         res.json(result);
     })
+});
+router.get('/getSalary', function(req, res, next) {
+    var result = {};
+    Job.getMinSalaryGroupByWorkYear(function(err, data) {
+        if (err) {
+            res.render('error', { error: err });
+        }
+        result.legend = [];
+        result.min = [];
+        result.max = [];
+        result.avg = [];
+        data.forEach(function(element) {
+            result.legend.push(element._id);
+            result.min.push(element.minValue);
+        }, this);
+        Job.getAvgSalaryGroupByWorkYear(function(err, data) {
+            if (err) {
+                res.render('error', { error: err });
+            }
+            data.forEach(function(element) {
+                result.avg.push(element.avgValue.toFixed(2));
+            }, this);
+            Job.getMaxSalaryGroupByWorkYear(function(err, data) {
+                if (err) {
+                    res.render('error', { error: err });
+                }
+                data.forEach(function(element) {
+                    result.max.push(element.maxValue);
+                }, this);
+                res.json(result);
+            });
+        })
+    });
 });
 module.exports = router;

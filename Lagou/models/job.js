@@ -49,12 +49,12 @@ Job.getTotalListGroupByWorkYear=function (callback) {
     jobModel.aggregate([{$group : {_id : "$workYear",total:{$sum:1}}},{ $sort : {total:-1}}]).exec(callback);
 };
 Job.getMinSalaryGroupByWorkYear=function (callback) {
-    jobModel.aggregate([{$group:{_id:"$workYear", minValue: {$min:"$minsalary"}}},{ $sort : {minValue:1}}]).exec(callback);
+    jobModel.aggregate([{$group:{_id:"$workYear", minValue: {$min:"$minsalary"}}},{ $sort : {_id:1}}]).exec(callback);
 };
 Job.getMaxSalaryGroupByWorkYear=function (callback) {
-    jobModel.aggregate([{$group:{_id:"$workYear", maxValue: {$max:"$minsalary"}}},{ $sort : {maxValue:1}}]).exec(callback);
+    jobModel.aggregate([{$group:{_id:"$workYear", maxValue: {$max:"$minsalary"}}},{ $sort : {_id:1}}]).exec(callback);
 };
 Job.getAvgSalaryGroupByWorkYear=function (callback) {
-    jobModel.aggregate([{$group:{_id:"$workYear", avgValue: {$avg:"$minsalary"}}},{ $sort : {avgValue:1}}]).exec(callback);
+    jobModel.aggregate([{$group:{_id:"$workYear", avgValue: {$avg:"$minsalary"}}},{ $sort : {_id:1}}]).exec(callback);
 };
 module.exports = Job;
