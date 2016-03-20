@@ -13,7 +13,7 @@ router.get('/getTotalListGroupByWorkYear', function(req, res, next) {
         res.json(result);
     })
 });
-router.get('/getSalary', function(req, res, next) {
+router.post('/getSalary', function(req, res, next) {
     var result = {};
     Job.getMinSalaryGroupByWorkYear(function(err, data) {
         if (err) {
