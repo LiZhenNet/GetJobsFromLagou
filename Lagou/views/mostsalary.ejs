@@ -1,0 +1,58 @@
+<% include header.ejs%>
+    <div style='background:#F7F7F7;'>
+        <div class="am-container am-vertical-align" style="min-height:545px;">
+            <div class="am-g am-vertical-align-middle">
+                <table class="am-table">
+                    <thead>
+                        <tr>
+                            <th>工作年限</th>
+                            <th>最高薪资</th>
+                            <th>查看</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach(function(item){ %>
+                            <tr>
+                                <td>
+                                    <%= item._id %>
+                                </td>
+                                <td>
+                                    <%= item.maxValue %>
+                                </td>
+                                <td>
+                                    <button type="button" class="am-btn am-btn-success am-round am-btn-xs">查看</button>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <div class="am-g">
+                    <small>注:薪资统计按照拉钩标示的最低值统计，例如：工作年限3-5年，薪资15k-20k，统计时取值为15k</small>
+                </div>
+                <div class="am-g">
+                    <table id="table"></table>
+                </div>
+            </div>
+        </div>
+        <div>
+ <% include footer.ejs%>
+ <link rel="stylesheet" href="./stylesheets/bootstrap-table.min.css">
+ <script src='./javascripts/bootstrap-table.min.js'></script>
+ <script>
+$('#table').bootstrapTable({
+    // url: 'data1.json',
+    // method:'post',
+
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }, ]
+});
+$('#table').bootstrapTable('showLoading');
+ </script>

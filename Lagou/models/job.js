@@ -32,7 +32,7 @@ function Job(job) {
     this.education = job.education,
     this.workYear =common.fromateWorkYear(job.workYear),
     this.createTime = new Date(job.createTime)
-};
+}
 Job.prototype.save = function(callback) {
     var newjob = new jobModel(this);
     newjob.save(function(err, job) {
