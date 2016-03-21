@@ -57,4 +57,11 @@ Job.getMaxSalaryGroupByWorkYear=function (callback) {
 Job.getAvgSalaryGroupByWorkYear=function (callback) {
     jobModel.aggregate([{$group:{_id:"$workYear", avgValue: {$avg:"$minsalary"}}},{ $sort : {_id:1}}]).exec(callback);
 };
+Job.getCompanyListByWorkYear=function(workyear,callback){
+    jobModel.find()
+        .where('workYear').equals(workyear)
+        .limit(20)
+        .sort('-minsalary')
+        .exec(callback);
+};
 module.exports = Job;

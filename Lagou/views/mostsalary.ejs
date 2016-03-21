@@ -20,7 +20,7 @@
                                     <%= item.maxValue %>
                                 </td>
                                 <td>
-                                    <button type="button" class="am-btn am-btn-success am-round am-btn-xs">查看</button>
+                                    <button type="button" onclick="getList('<%= item._id %>')"  class="am-btn am-btn-success am-round am-btn-xs">看看都有谁</button>
                                 </td>
                             </tr>
                             <% }) %>
@@ -34,25 +34,41 @@
                 </div>
             </div>
         </div>
-        <div>
- <% include footer.ejs%>
- <link rel="stylesheet" href="./stylesheets/bootstrap-table.min.css">
- <script src='./javascripts/bootstrap-table.min.js'></script>
- <script>
-$('#table').bootstrapTable({
-    // url: 'data1.json',
-    // method:'post',
+    </div>
 
-    columns: [{
-        field: 'id',
-        title: 'Item ID'
-    }, {
-        field: 'name',
-        title: 'Item Name'
-    }, {
-        field: 'price',
-        title: 'Item Price'
-    }, ]
-});
-$('#table').bootstrapTable('showLoading');
- </script>
+    <% include footer.ejs%>
+        <link rel="stylesheet" href="./stylesheets/bootstrap-table.min.css">
+        <script src='./javascripts/bootstrap-table.min.js'></script>
+        <script>
+            function getList(workyear){
+                $('#table').bootstrapTable('showLoading');
+                $('#table').bootstrapTable({
+                url: '/api/getCompanyListByMaxSalary',
+                method:'post',
+                queryParams:function(){
+                    return{workyear:workyear};
+                },
+                columns: [{
+                        field: 'positionName',
+                        title: '职位'
+                    }, {
+                        field: 'salary',
+                        title: '薪资'
+                    }, {
+                        field: 'workYear',
+                        title: '工作年限'
+                    }, {
+                        field: 'companyName',
+                        title: '公司名称'
+                    },
+                    {
+                        field: 'companySize',
+                        title: '公司规模'
+                    }, {
+                        field: 'industryField',
+                        title: '行业'
+                    },
+                ]
+            });
+            }
+        </script>
