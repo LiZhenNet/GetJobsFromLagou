@@ -33,7 +33,7 @@ $.get('/api/getTotalListGroupByWorkYear').done(function(data) {
             radius: '55%',
             center: ['50%', '50%'],
             roseType: 'radius',
-            data: data.sort(function(a, b) { return a.value - b.value }),
+            data: data.sort(function(a, b) { return a.value - b.value; }),
             label: {
                 normal: {
                     textStyle: {

@@ -46,9 +46,9 @@ function getJobs(pageNo,city,kd) {
             console.log(jobjson.msg);
         }
     });
-};
+}
 (function () {
     Job.removeAll();
     console.log(new Date().toLocaleTimeString() +'开始抓取'+config.city+'的'+config.kd+'职位' );
     getJobs(1,config.city,config.kd);
-})()
+})();

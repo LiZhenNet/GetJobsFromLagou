@@ -29,5 +29,5 @@ var common = {
             return 0;
         }
     },
-}
-module.exports = common
+};
+module.exports = common;
