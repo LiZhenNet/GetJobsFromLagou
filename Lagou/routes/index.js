@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Job = require('../models/job');
 router.get('/', function(req, res, next) {
-    res.render('index', { title: '拉钩职位数据分析' });
+    res.render('index', { title: '拉钩找工作' });
 });
 
 router.get('/salary', function(req, res, next) {
