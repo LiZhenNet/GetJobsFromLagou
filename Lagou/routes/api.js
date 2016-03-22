@@ -43,13 +43,13 @@ router.post('/getSalary', function(req, res, next) {
                 }, this);
                 res.json(result);
             });
-        })
+        });
     });
 });
 router.post('/getCompanyListByMaxSalary',function(req, res, next){
    var workyear=req.body.workyear; 
    Job.getCompanyListByWorkYear(workyear,function(err,result){
        res.json(result);
-   })
+   });
 });
 module.exports = router;
