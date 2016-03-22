@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/salary', function(req, res, next) {
-    res.render('salary', { title: '薪资统计' });
+    res.render('salary', { title: '薪资统计Chart' });
 });
 
 router.get('/mostsalary', function(req, res, next) {
@@ -14,14 +14,14 @@ router.get('/mostsalary', function(req, res, next) {
         if (err) {
             res.render('error', { error: err });
         }
-        res.render('mostsalary', { title: '薪资最多', data: data });
+        res.render('mostsalary', { title: '土豪公司List', data: data });
     });
 });
 
 router.get('/workyear', function(req, res, next) {
     res.render('workyear', { title: '职位数' });
 });
-router.get('/search',function (req, res, next) {
-   res.render('search', { title: '搜索' });
+router.get('/resume',function (req, res, next) {
+   res.render('resume', { title: '如何写简历' });
 });
 module.exports = router;
