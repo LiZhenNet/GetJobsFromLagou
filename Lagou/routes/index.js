@@ -19,6 +19,9 @@ router.get('/mostsalary', function(req, res, next) {
 });
 
 router.get('/workyear', function(req, res, next) {
-    res.render('workyear', { title: 'Express' });
+    res.render('workyear', { title: '职位数' });
+});
+router.get('/search',function (req, res, next) {
+   res.render('search', { title: '搜索' });
 });
 module.exports = router;
