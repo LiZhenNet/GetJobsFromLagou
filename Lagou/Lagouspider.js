@@ -6,8 +6,8 @@ function InsertDB(Data) {
             positionId:job.positionId,
             positionName: job.positionName,
             positionAdvantage: job.positionAdvantage,
-            salary: job.salary,
-            companyName: job.companyName,
+            salary: job.salary.toLowerCase(),
+            companyName: job.companyFullName,
             companySize: job.companySize,
             companyLabelList: job.companyLabelList,
             industryField:job.industryField,
@@ -28,15 +28,18 @@ function getJobs(pageNo,city,kd) {
     } else {
         url = 'http://www.lagou.com/jobs/positionAjax.json?city=' + urlencode(city) + '&first=false&kd=' + urlencode(kd) + '&pn=' + pageNo;
     }
+
     superagent.get(url).end(function(err, sres) {
         if (err) {
             hasNextPage = false;
             console.log(err);
         }
+        
         var jobjson = JSON.parse(sres.text);
+
         if (jobjson.success) {
-            InsertDB(jobjson.content.result);
-            if (pageNo<jobjson.content.totalPageCount) {
+            InsertDB(jobjson.content.positionResult.result);
+            if (pageNo<jobjson.content.positionResult.totalCount) {
                 getJobs(pageNo + 1,city,kd);
             } else {
                 console.log('抓取完毕，共抓取' + pageNo + '页数据');
